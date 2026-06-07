@@ -123,6 +123,7 @@ def team_label(team):
     url = FLAG_URLS.get(team, "")
     return f"<img src='{url}' width='25' style='vertical-align:middle;'> {team}"
 
+@st.cache_data  # cache for 5 minutes
 def load_fixtures():
     scope = [
         "https://www.googleapis.com/auth/spreadsheets",
