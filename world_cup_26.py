@@ -67,7 +67,7 @@ if st.button("Submit Predictions", disabled=disabled):
     st.success("Submitted! Good luck!")
 
 st.write("Instructions:")
-st.write("Choose a result for all group games. Select 3 BONUS games to gain extra points per goal scored")
+st.text("Choose a result for all group games. Select 3 BONUS games to gain extra points per goal scored")
 
 st.write("Enter your predictions below")
     
