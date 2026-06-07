@@ -62,7 +62,7 @@ disabled = (
     "pred_df" not in st.session_state
 )
 
-if st.button("Submit Predictions", disabled=disabled):
+if st.button("#Submit Predictions", disabled=disabled):
     send_to_google(st.session_state["pred_df"], player)
     st.success("Submitted! Good luck!")
 
