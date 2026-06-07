@@ -66,6 +66,9 @@ if st.button("Submit Predictions", disabled=disabled):
     send_to_google(st.session_state["pred_df"], player)
     st.success("Submitted! Good luck!")
 
+st.write("Instructions:")
+st.write("Choose a result for all group games. Select 3 BONUS games to gain extra points per goal scored")
+
 st.write("Enter your predictions below")
     
 FLAG_URLS = {
@@ -203,6 +206,21 @@ def compute_group_table(matches):
 
     return table.reset_index()
 
+def assign_positions(standings):
+    positions = []
+
+    for group in standings["Group"].unique():
+        group_df = standings[standings["Group"] == group].reset_index(drop=True)
+
+        for i, row in group_df.iterrows():
+            pos_label = f"{i+1}{group}"   # 1A, 2A, 3A, 4A
+            positions.append({
+                "Position": pos_label,
+                "Team": row["Team"]
+            })
+
+    return pd.DataFrame(positions)
+
 predictions = []
 
 tabs = st.tabs([f"Group {g}" for g in groups])
@@ -298,6 +316,14 @@ for tab, group in zip(tabs, groups):
     
 pred_df = pd.DataFrame(predictions).sort_values("Match").reset_index(drop=True)
 st.session_state["pred_df"] = pred_df
+
+positions_df = assign_positions(table)
+
+team_1A = positions_df.loc[positions_df["Position"] == "1A", "Team"].iloc[0]
+team_2B = positions_df.loc[positions_df["Position"] == "2B", "Team"].iloc[0]
+
+round_of_32_match = f"{team_1A} vs {team_2B}"
+
 
 # Store how many predictions are complete
 st.session_state["pred_count"] = len(predictions)
