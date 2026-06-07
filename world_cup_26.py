@@ -66,9 +66,22 @@ if st.button("Submit Predictions", disabled=disabled):
     send_to_google(st.session_state["pred_df"], player)
     st.success("Submitted! Good luck!")
 
-st.write("Instructions:")
-st.text("Choose a result for all group games. Select 3 BONUS games to gain extra points per goal scored")
+st.markdown("""
+## 📝 Instructions
 
+Choose a **result** and **margin of victory** for all group games.  
+Also select **3 BONUS games** for extra points per goal scored.
+
+---
+
+## 🏆 Points System
+
+- **3 points** for correct result  
+- **2 points** for correct margin (must have correct result)  
+- **1 point** for being within 1 of correct margin (must have correct result)  
+- **4 points** for correctly predicting a **draw**  
+- **3 points per goal** scored in your selected **BONUS games**
+""")
 st.write("Enter your predictions below")
     
 FLAG_URLS = {
