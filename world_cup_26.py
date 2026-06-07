@@ -16,11 +16,13 @@ def send_to_google(pred_df, player):
         "https://www.googleapis.com/auth/drive"
     ]
 
-    creds = Credentials.from_service_account_file(
-        "divine-builder-498621-p4-c83fc60642e8.json",
-        scopes=scope
-    )
-
+    #creds = Credentials.from_service_account_file(
+    #    "divine-builder-498621-p4-c83fc60642e8.json",
+    #    scopes=scope
+    #)
+    creds_dict = st.secrets["google"]
+    creds = Credentials.from_service_account_info(creds_dict,scopes=scope)
+    
     client = gspread.authorize(creds)
     sh = client.open("World_Cup_26_Predictor")
     try:
@@ -121,8 +123,26 @@ def team_label(team):
     url = FLAG_URLS.get(team, "")
     return f"<img src='{url}' width='25' style='vertical-align:middle;'> {team}"
 
+def load_fixtures():
+    scope = [
+        "https://www.googleapis.com/auth/spreadsheets",
+        "https://www.googleapis.com/auth/drive"
+    ]
 
-fixtures = pd.read_excel(r"C:\Users\matta\OneDrive\Documents\Matt's Stuff\Footy\World Cup 2026\FIFA_WC_26_Fixtures.xlsx")
+    creds_dict = st.secrets["google"]
+    creds = Credentials.from_service_account_info(creds_dict, scopes=scope)
+
+    client = gspread.authorize(creds)
+    sh = client.open("World_Cup_26_Predictor")
+
+    worksheet = sh.worksheet("Fixtures")  # name of the tab
+    data = worksheet.get_all_records()
+
+    df = pd.DataFrame(data)
+    return df
+
+fixtures = load_fixtures()
+#fixtures = pd.read_excel(r"C:\Users\matta\OneDrive\Documents\Matt's Stuff\Footy\World Cup 2026\FIFA_WC_26_Fixtures.xlsx")
 
 groups = sorted(fixtures["Group"].unique())
 teams = sorted(set(fixtures["Team A"]).union(fixtures["Team B"]))
