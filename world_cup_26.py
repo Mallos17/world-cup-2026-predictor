@@ -330,12 +330,12 @@ for tab, group in zip(tabs, groups):
 pred_df = pd.DataFrame(predictions).sort_values("Match").reset_index(drop=True)
 st.session_state["pred_df"] = pred_df
 
-positions_df = assign_positions(table)
+#positions_df = assign_positions(table)
 
-team_1A = positions_df.loc[positions_df["Position"] == "1A", "Team"].iloc[0]
-team_2B = positions_df.loc[positions_df["Position"] == "2B", "Team"].iloc[0]
+#team_1A = positions_df.loc[positions_df["Position"] == "1A", "Team"].iloc[0]
+#team_2B = positions_df.loc[positions_df["Position"] == "2B", "Team"].iloc[0]
 
-round_of_32_match = f"{team_1A} vs {team_2B}"
+#round_of_32_match = f"{team_1A} vs {team_2B}"
 
 
 # Store how many predictions are complete
