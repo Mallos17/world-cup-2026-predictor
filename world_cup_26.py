@@ -32,16 +32,21 @@ def send_to_google(pred_df, player):
         worksheet = sh.worksheet(player)
 
     # Write the DataFrame to the sheet
-    worksheet.update("A1", [["Tournament Winner"]])
-    worksheet.update("B1", [[winner]])
+    worksheet.update("A3", [["Player"]])
+    worksheet.update("B3", [[player]])
+    worksheet.update("A3", [["Number"]])
+    worksheet.update("B3", [[phone]])
+    
+    worksheet.update("A3", [["Tournament Winner"]])
+    worksheet.update("B3", [[winner]])
 
 
-    worksheet.update("A2", [["Golden Boot"]])
-    worksheet.update("B2", [[golden]])
+    worksheet.update("A4", [["Golden Boot"]])
+    worksheet.update("B4", [[golden]])
 
     #worksheet.update([pred_df.columns.values.tolist()] + pred_df.values.tolist())
-    worksheet.update("A4", [pred_df.columns.tolist()])
-    worksheet.update("A5", pred_df.values.tolist())
+    worksheet.update("A5", [pred_df.columns.tolist()])
+    worksheet.update("A6", pred_df.values.tolist())
 
 
 st.title("World Cup Prediction App")
