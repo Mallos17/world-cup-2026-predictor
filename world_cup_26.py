@@ -47,6 +47,7 @@ def send_to_google(pred_df, player):
 st.title("World Cup Prediction App")
 
 player = st.text_input("PLAYER NAME:", placeholder="Type your name here")
+phone = st.text_input("Phone Number:", placeholder="Type your phone number here (for score updates)")
 winner = st.text_input("My World Cup Winner:", placeholder="Type Team here")
 golden = st.text_input("Golden Boot Winner:", placeholder="Type your Player here")
 
@@ -72,6 +73,7 @@ st.markdown("""
 Choose a **result** and **margin of victory** for all group games.  
 Also select **3 BONUS games** for extra points per goal scored.
 
+£20 entry fee!
 ---
 
 ## 🏆 Points System
