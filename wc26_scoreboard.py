@@ -33,7 +33,7 @@ def load_sheet_tab(sheet_name, tab_name):
         "https://www.googleapis.com/auth/drive"
     ]
 
-    creds_dict = st.secrets["google"]
+    creds_dict = st.secrets["gcp_service_account"]
     creds = Credentials.from_service_account_info(creds_dict, scopes=scope)
     
     client = gspread.authorize(creds)
