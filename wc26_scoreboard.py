@@ -172,12 +172,12 @@ def prepare_results_table(df):
 
     return df
 
-results = pd.read_excel(r"C:\Users\matta\OneDrive\Documents\Matt's Stuff\Footy\World Cup 2026\wc26_app_leaderboard.xlsx",sheet_name="Results")
-leaderboard = pd.read_excel(r"C:\Users\matta\OneDrive\Documents\Matt's Stuff\Footy\World Cup 2026\wc26_app_leaderboard.xlsx",sheet_name="Leaderboard")
+#results = pd.read_excel(r"C:\Users\matta\OneDrive\Documents\Matt's Stuff\Footy\World Cup 2026\wc26_app_leaderboard.xlsx",sheet_name="Results")
+#leaderboard = pd.read_excel(r"C:\Users\matta\OneDrive\Documents\Matt's Stuff\Footy\World Cup 2026\wc26_app_leaderboard.xlsx",sheet_name="Leaderboard")
 
 
-fixtures = pd.read_excel(r"C:\Users\matta\OneDrive\Documents\Matt's Stuff\Footy\World Cup 2026\WC2026_Scoreboard.xlsx",sheet_name="Fixtures")
-leaderboard_2 = pd.read_excel(r"C:\Users\matta\OneDrive\Documents\Matt's Stuff\Footy\World Cup 2026\WC2026_Scoreboard.xlsx",sheet_name="Leaderboard")
+#fixtures = pd.read_excel(r"C:\Users\matta\OneDrive\Documents\Matt's Stuff\Footy\World Cup 2026\WC2026_Scoreboard.xlsx",sheet_name="Fixtures")
+#leaderboard_2 = pd.read_excel(r"C:\Users\matta\OneDrive\Documents\Matt's Stuff\Footy\World Cup 2026\WC2026_Scoreboard.xlsx",sheet_name="Leaderboard")
 
 
 md_dict = {'2026-06-11':1,'2026-06-12':2,'2026-06-13':3,'2026-06-14':4,
@@ -187,30 +187,30 @@ md_dict = {'2026-06-11':1,'2026-06-12':2,'2026-06-13':3,'2026-06-14':4,
            '2026-06-27':17,'2026-06-28':18,'2026-06-29':19}
 
 #scoreboard = load_scoreboard()
-leader_sort = leaderboard.sort_values(
-    by=["Pos","Group Stage"],
-    ascending=[True, False]
-).reset_index(drop=True)
+#leader_sort = leaderboard.sort_values(
+#    by=["Pos","Group Stage"],
+#    ascending=[True, False]
+#).reset_index(drop=True)
 
-leader_sort_2 = leaderboard_2.sort_values(
-    by=["Pos","Group Stage"],
-    ascending=[True, False]
-).reset_index(drop=True)
+#leader_sort_2 = leaderboard_2.sort_values(
+#    by=["Pos","Group Stage"],
+#    ascending=[True, False]
+#).reset_index(drop=True)
 
-results["Date"] = pd.to_datetime(results["Date"]).dt.date
+#results["Date"] = pd.to_datetime(results["Date"]).dt.date
 md_dict.get((date.today() + timedelta(days=2)).strftime("%Y-%m-%d"))
-new_results = results[results['MD']<md_dict.get((date.today() + timedelta(days=2)).strftime("%Y-%m-%d"))]
-new_results = new_results.drop(columns=['MD','Location'])
+#new_results = results[results['MD']<md_dict.get((date.today() + timedelta(days=2)).strftime("%Y-%m-%d"))]
+#new_results = new_results.drop(columns=['MD','Location'])
 
-fixtures["Date"] = pd.to_datetime(fixtures["Date"]).dt.date
-md_dict.get((date.today() + timedelta(days=2)).strftime("%Y-%m-%d"))
-new_fix = fixtures[fixtures['MD']<md_dict.get((date.today() + timedelta(days=2)).strftime("%Y-%m-%d"))]
-new_fix = new_fix.drop(columns=['MD'])
+#fixtures["Date"] = pd.to_datetime(fixtures["Date"]).dt.date
+#md_dict.get((date.today() + timedelta(days=2)).strftime("%Y-%m-%d"))
+#new_fix = fixtures[fixtures['MD']<md_dict.get((date.today() + timedelta(days=2)).strftime("%Y-%m-%d"))]
+#new_fix = new_fix.drop(columns=['MD'])
 
-leader_sort_2 = leader_sort_2.drop(columns=['Knockouts'])
+#leader_sort_2 = leader_sort_2.drop(columns=['Knockouts'])
 
 
-results_df["Date"] = pd.to_datetime(results["Date"]).dt.date
+results_df["Date"] = pd.to_datetime(results_df["Date"]).dt.date
 results_df = results_df[results_df['MD']<md_dict.get((date.today() + timedelta(days=2)).strftime("%Y-%m-%d"))]
 results_df = results_df.drop(columns=['MD'])
 
