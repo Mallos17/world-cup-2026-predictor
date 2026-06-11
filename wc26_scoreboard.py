@@ -218,7 +218,7 @@ scoreboard_df = scoreboard_df.sort_values(
     by=["Pos","Group Stage"],
     ascending=[True, False]
 ).reset_index(drop=True)
-scoreboard_df = scoreboard_df.drop(columns=['Knockouts'])
+#scoreboard_df = scoreboard_df.drop(columns=['Knockouts'])
 
 
 tab1, tab2 = st.tabs(["🏆 Leaderboard", "📊 Results"])
