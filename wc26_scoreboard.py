@@ -149,8 +149,9 @@ def prepare_results_table(df):
     df["Team A"] = df["Team A"].apply(team_label)
     df["Team B"] = df["Team B"].apply(team_label)
 
-    df["AS"] = int(df["AS"])
-    df["BS"] = int(df["BS"])
+    # Convert floats → nullable Int64
+    #df["AS"] = df["AS"].astype("Int64")
+    #df["BS"] = df["BS"].astype("Int64")
 
     # Convert to string so we can safely replace NaN with ""
     df["AS"] = df["AS"].astype("string")
