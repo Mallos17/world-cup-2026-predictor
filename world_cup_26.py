@@ -32,10 +32,10 @@ def send_to_google(pred_df, player):
         worksheet = sh.worksheet(player)
 
     # Write the DataFrame to the sheet
-    worksheet.update("A3", [["Player"]])
-    worksheet.update("B3", [[player]])
-    worksheet.update("A3", [["Number"]])
-    worksheet.update("B3", [[phone]])
+    worksheet.update("A1", [["Player"]])
+    worksheet.update("B1", [[player]])
+    worksheet.update("A2", [["Number"]])
+    worksheet.update("B2", [[phone]])
     
     worksheet.update("A3", [["Tournament Winner"]])
     worksheet.update("B3", [[winner]])
