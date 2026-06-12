@@ -217,7 +217,7 @@ results_df = results_df.drop(columns=['MD'])
 
 scoreboard_df = scoreboard_df.sort_values(
     by=["Points","Group Stage"],
-    ascending=[True, False]
+    ascending=[False, False]
 ).reset_index(drop=True)
 #scoreboard_df = scoreboard_df.drop(columns=['Knockouts'])
 
