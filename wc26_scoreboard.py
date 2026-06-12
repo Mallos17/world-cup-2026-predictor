@@ -26,7 +26,7 @@ st.markdown("""
 Keep an eye out for the **Knockouts Predictor**
 """)
 
-@st.cache_data(ttl=300)  # cache for 5 minutes
+@st.cache_data(ttl=120)  # cache for 5 minutes
 def load_sheet_tab(sheet_name, tab_name):
     scope = [
         "https://www.googleapis.com/auth/spreadsheets",
@@ -212,7 +212,7 @@ md_dict.get((date.today() + timedelta(days=2)).strftime("%Y-%m-%d"))
 
 
 results_df["Date"] = pd.to_datetime(results_df["Date"]).dt.date
-results_df = results_df[results_df['MD']<md_dict.get((date.today() + timedelta(days=2)).strftime("%Y-%m-%d"))]
+results_df = results_df[results_df['MD']<md_dict.get((date.today() + timedelta(days=1)).strftime("%Y-%m-%d"))]
 results_df = results_df.drop(columns=['MD'])
 
 scoreboard_df = scoreboard_df.sort_values(
