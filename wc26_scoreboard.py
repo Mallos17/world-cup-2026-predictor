@@ -26,7 +26,7 @@ st.markdown("""
 Keep an eye out for the **Knockouts Predictor**
 """)
 
-@st.cache_data  # cache for 5 minutes
+@st.cache_data(ttl=300)  # cache for 5 minutes
 def load_sheet_tab(sheet_name, tab_name):
     scope = [
         "https://www.googleapis.com/auth/spreadsheets",
@@ -216,7 +216,7 @@ results_df = results_df[results_df['MD']<md_dict.get((date.today() + timedelta(d
 results_df = results_df.drop(columns=['MD'])
 
 scoreboard_df = scoreboard_df.sort_values(
-    by=["Pos","Group Stage"],
+    by=["Points","Group Stage"],
     ascending=[True, False]
 ).reset_index(drop=True)
 #scoreboard_df = scoreboard_df.drop(columns=['Knockouts'])
@@ -248,7 +248,7 @@ with tab1:
     unsafe_allow_html=True)
     
 with tab2:
-    st.subheader("Results")
+    st.subheader("Results & Upcoming Fixtures")
     #results_display = prepare_results_table(new_results)
     #st.markdown(
     #    results_display.to_html(index=False, escape=False),
