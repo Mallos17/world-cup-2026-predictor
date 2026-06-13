@@ -277,12 +277,37 @@ with tab2:
 with tab3:
     st.subheader("Predictions")
     html = player_df.to_html(index=False, escape=False)
+    # Split into rows
+    rows = html.split("</tr>")
 
-# Add a vertical border every 3 columns
-    html = html.replace(
-    "<td>",
-    "<td style='border-right: 2px solid #ccc;'>",
-    3  # only replace the first 3 occurrences per row
-)
-    st.markdown(html, unsafe_allow_html=True)
+    new_rows = []
+
+    for row in rows:
+        if "<tr" not in row:
+            continue
+
+        # Split row into cells
+        cells = row.split("</td>")
+        new_cells = []
+
+        for i, cell in enumerate(cells):
+            if "<td" in cell or "<th" in cell:
+                new_cells.append(cell + "</td>")#
+                
+                # Insert separator after every 3rd column
+                if i > 4:
+                    if (i + 1) % 3 == 0:
+                        new_cells.append(
+                            "<td style='border-right:3px solid #000; padding:0;'></td>"
+                            )
+
+        # Rebuild row
+        new_row = "".join(new_cells)
+        new_rows.append(new_row)
+
+    # Reassemble table
+    html_with_lines = "</tr>".join(new_rows)
+
+    st.markdown(html_with_lines, unsafe_allow_html=True)
+
 #st.dataframe(leader_sort,hide_index=True)
