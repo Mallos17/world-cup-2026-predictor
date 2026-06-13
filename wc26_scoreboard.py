@@ -8,6 +8,7 @@ import streamlit as st
 import pandas as pd
 import gspread
 from google.oauth2.service_account import Credentials
+import datetime
 from datetime import date,timedelta
 #import gspread
 #from google.oauth2.service_account import Credentials
@@ -46,12 +47,19 @@ def load_sheet_tab(sheet_name, tab_name):
 
     # Convert to DataFrame
     data = worksheet.get_all_records()
-    return pd.DataFrame(data)
+    df = pd.DataFrame(data)
 
-results_df = load_sheet_tab("World_Cup_2026_Scoreboard", "Results")
-scoreboard_df = load_sheet_tab("World_Cup_2026_Scoreboard", "Scoreboard")
+    # Return both the data AND the timestamp
+    last_updated = datetime.datetime.now().strftime("%H:%M:%S")
+    return df, last_updated
+
+results_df, results_updated = load_sheet_tab("World_Cup_2026_Scoreboard", "Results")
+scoreboard_df, scoreboard_updated = load_sheet_tab("World_Cup_2026_Scoreboard", "Scoreboard")
+
+with st.sidebar:
+    st.write(f"Results updated: {results_updated}")
+    st.write(f"Scoreboard updated: {scoreboard_updated}")
     
-
 FLAG_URLS = {
     "Mexico": "https://flagcdn.com/w40/mx.png",
     "South Africa": "https://flagcdn.com/w40/za.png",
