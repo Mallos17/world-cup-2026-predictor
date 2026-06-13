@@ -321,7 +321,7 @@ th, td {
 }
 
 /* Freeze first 6 columns */
-td:nth-child(1), th:nth-child(1) { position: sticky; left: 0; background: white; z-index: 3; }
+td:nth-child(1), th:nth-child(1) { position: sticky; left: 0; background: black; z-index: 3; }
 td:nth-child(2), th:nth-child(2) { position: sticky; left: 120px; background: white; z-index: 3; }
 td:nth-child(3), th:nth-child(3) { position: sticky; left: 240px; background: white; z-index: 3; }
 td:nth-child(4), th:nth-child(4) { position: sticky; left: 360px; background: white; z-index: 3; }
