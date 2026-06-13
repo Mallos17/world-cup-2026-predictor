@@ -277,5 +277,12 @@ with tab2:
 with tab3:
     st.subheader("Predictions")
     html = player_df.to_html(index=False, escape=False)
+
+# Add a vertical border every 3 columns
+    html = html.replace(
+    "<td>",
+    "<td style='border-right: 2px solid #ccc;'>",
+    3  # only replace the first 3 occurrences per row
+)
     st.markdown(html, unsafe_allow_html=True)
 #st.dataframe(leader_sort,hide_index=True)
