@@ -244,7 +244,7 @@ with tab1:
     #st.markdown(
     #new_new_new_leader_2.to_html(index=False, escape=False),
     #unsafe_allow_html=True)
-    st.markdown(f"**Results last updated:** {results_updated + timedelta(hours=1)} BST")
+    st.markdown(f"**Results last updated:** {results_updated} BST")
     scoreboard_df = center_columns(scoreboard_df,['Pos','Points','Gap','Group Stage','Bonus Points'])
     scoreboard_df = highlight_column(scoreboard_df, 'Points')
     scoreboard_df = colour_leader(scoreboard_df, ["Gap"])
@@ -254,7 +254,7 @@ with tab1:
     
 with tab2:
     st.subheader("Results & Upcoming Fixtures")
-    st.markdown(f"**Scoreboard last updated:** {scoreboard_updated + timedelta(hours=1)} BST")
+    st.markdown(f"**Scoreboard last updated:** {scoreboard_updated} BST")
     #results_display = prepare_results_table(new_results)
     #st.markdown(
     #    results_display.to_html(index=False, escape=False),
