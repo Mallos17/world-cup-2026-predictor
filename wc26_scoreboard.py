@@ -310,7 +310,32 @@ with tab3:
         new_rows.append("".join(new_cells))
 
     html_with_lines = "</tr>".join(new_rows)
+    freeze_css = """
+<style>
+table {
+    border-collapse: collapse;
+}
 
+th, td {
+    white-space: nowrap;
+}
+
+/* Freeze first 6 columns */
+td:nth-child(1), th:nth-child(1) { position: sticky; left: 0; background: white; z-index: 3; }
+td:nth-child(2), th:nth-child(2) { position: sticky; left: 120px; background: white; z-index: 3; }
+td:nth-child(3), th:nth-child(3) { position: sticky; left: 240px; background: white; z-index: 3; }
+td:nth-child(4), th:nth-child(4) { position: sticky; left: 360px; background: white; z-index: 3; }
+td:nth-child(5), th:nth-child(5) { position: sticky; left: 480px; background: white; z-index: 3; }
+td:nth-child(6), th:nth-child(6) { position: sticky; left: 600px; background: white; z-index: 3; }
+
+/* Optional: add a shadow on the frozen block */
+td:nth-child(6), th:nth-child(6) {
+    box-shadow: 3px 0 5px rgba(0,0,0,0.2);
+}
+</style>
+"""
+
+    st.markdown(freeze_css, unsafe_allow_html=True)
     st.markdown(html_with_lines, unsafe_allow_html=True)
 
 #st.dataframe(leader_sort,hide_index=True)
