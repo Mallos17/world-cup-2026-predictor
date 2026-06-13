@@ -176,7 +176,7 @@ def prepare_results_table(df):
 
     # --- 4. Centre the dash column if you have one ---
     if "-" in df.columns:
-        df["-"] = df["-"].apply(lambda x: "<div style='text-align:center;'>-</div>")
+        df["-"] = df["-"].apply(lambda x: "<div style='text-align:center;'>{x}</div>")
 
     return df
 
