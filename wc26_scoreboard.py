@@ -10,7 +10,7 @@ import gspread
 from google.oauth2.service_account import Credentials
 import datetime
 from zoneinfo import ZoneInfo
-from datetime import date,timedelta
+from datetime import date,datetime,timedelta
 #import gspread
 #from google.oauth2.service_account import Credentials
 
@@ -51,7 +51,8 @@ def load_sheet_tab(sheet_name, tab_name):
     df = pd.DataFrame(data)
 
     # Return both the data AND the timestamp
-    last_updated = datetime.now(ZoneInfo("Europe/London")).strftime("%H:%M:%S BST")
+    last_updated = (datetime.utcnow() + timedelta(hours=1)).strftime("%H:%M:%S BST")
+
     return df, last_updated
 
 results_df, results_updated = load_sheet_tab("World_Cup_2026_Scoreboard", "Results")
