@@ -57,7 +57,7 @@ def load_sheet_tab(sheet_name, tab_name):
 
 results_df, results_updated = load_sheet_tab("World_Cup_2026_Scoreboard", "Results")
 scoreboard_df, scoreboard_updated = load_sheet_tab("World_Cup_2026_Scoreboard", "Scoreboard")
-
+player_df = load_sheet_tab("World_Cup_2026_Scoreboard", "Player_Pred")
 
 FLAG_URLS = {
     "Mexico": "https://flagcdn.com/w40/mx.png",
@@ -228,7 +228,7 @@ scoreboard_df = scoreboard_df.sort_values(
 #scoreboard_df = scoreboard_df.drop(columns=['Knockouts'])
 
 
-tab1, tab2 = st.tabs(["🏆 Leaderboard", "📊 Results"])
+tab1, tab2, tab3 = st.tabs(["🏆 Leaderboard", "📊 Results","🔮 Player Predictions"])
 
 with tab1:
     st.subheader("Leaderboard")
@@ -274,5 +274,7 @@ with tab2:
         unsafe_allow_html=True
     )
 
-
+with tab3:
+    st.subheader("Results & Upcoming Fixtures")
+    st.markdown(player_df)
 #st.dataframe(leader_sort,hide_index=True)
