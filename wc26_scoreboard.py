@@ -295,7 +295,7 @@ with tab3:
                 new_cells.append(cell + "</td>")#
                 
                 # Insert separator after every 3rd column
-                if i > 3:
+                if i > 2:
                     if (i + 1) % 3 == 0:
                         new_cells.append(
                             "<td style='border-right:3px solid #000; padding:0;'></td>"
