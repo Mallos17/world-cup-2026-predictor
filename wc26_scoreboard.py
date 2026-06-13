@@ -56,8 +56,8 @@ def load_sheet_tab(sheet_name, tab_name):
 results_df, results_updated = load_sheet_tab("World_Cup_2026_Scoreboard", "Results")
 scoreboard_df, scoreboard_updated = load_sheet_tab("World_Cup_2026_Scoreboard", "Scoreboard")
 
-results_updated = (datetime.strptime(results_updated, "%H:%M") + timedelta(hours=1))
-scoreboard_updated = (datetime.strptime(scoreboard_updated, "%H:%M") + timedelta(hours=1))
+results_updated = (datetime.strptime(results_updated, "%H:%M:%S") + timedelta(hours=1))
+scoreboard_updated = (datetime.strptime(scoreboard_updated, "%H:%M:%S") + timedelta(hours=1))
 
 FLAG_URLS = {
     "Mexico": "https://flagcdn.com/w40/mx.png",
