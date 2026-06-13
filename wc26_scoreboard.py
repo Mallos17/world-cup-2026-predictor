@@ -9,6 +9,7 @@ import pandas as pd
 import gspread
 from google.oauth2.service_account import Credentials
 import datetime
+from zoneinfo import ZoneInfo
 from datetime import date,timedelta
 #import gspread
 #from google.oauth2.service_account import Credentials
@@ -50,7 +51,7 @@ def load_sheet_tab(sheet_name, tab_name):
     df = pd.DataFrame(data)
 
     # Return both the data AND the timestamp
-    last_updated = datetime.datetime.now().strftime("%H:%M:%S") + timedelta(hours=1)
+    last_updated = datetime.now(ZoneInfo("Europe/London")).strftime("%H:%M:%S BST")
     return df, last_updated
 
 results_df, results_updated = load_sheet_tab("World_Cup_2026_Scoreboard", "Results")
@@ -231,7 +232,7 @@ tab1, tab2 = st.tabs(["🏆 Leaderboard", "📊 Results"])
 
 with tab1:
     st.subheader("Leaderboard")
-    st.markdown(f"**Scoreboard last updated:** {scoreboard_updated} BST")
+    st.markdown(f"**Scoreboard last updated:** {scoreboard_updated}")
     #new_leader = center_columns(leader_sort,['Pos','Points','Gap','Group Stage','Bonus Games'])
     #new_new_leader = highlight_column(new_leader, 'Points')
     #new_new_new_leader = colour_leader(new_new_leader, ["Gap"])
@@ -255,7 +256,7 @@ with tab1:
     
 with tab2:
     st.subheader("Results & Upcoming Fixtures")
-    st.markdown(f"**Results last updated:** {results_updated} BST")
+    st.markdown(f"**Results last updated:** {results_updated}")
     #results_display = prepare_results_table(new_results)
     #st.markdown(
     #    results_display.to_html(index=False, escape=False),
