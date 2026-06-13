@@ -302,7 +302,7 @@ with tab3:
                 col_num = i + 1
 
                 # Insert separator AFTER col 6, then 9, 12, 15...
-                if col_num > 6 and (col_num - 6) % 3 == 0:
+                if col_num > 3 and (col_num - 3) % 3 == 0:
                     new_cells.append(
                         "<td style='border-right:3px solid #000; padding:0;'></td>"
                         )
