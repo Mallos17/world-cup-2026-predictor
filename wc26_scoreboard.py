@@ -56,6 +56,8 @@ def load_sheet_tab(sheet_name, tab_name):
 results_df, results_updated = load_sheet_tab("World_Cup_2026_Scoreboard", "Results")
 scoreboard_df, scoreboard_updated = load_sheet_tab("World_Cup_2026_Scoreboard", "Scoreboard")
 
+results_updated = (datetime.strptime(results_updated, "%H:%M") + timedelta(hours=1))
+scoreboard_updated = (datetime.strptime(scoreboard_updated, "%H:%M") + timedelta(hours=1))
 
 FLAG_URLS = {
     "Mexico": "https://flagcdn.com/w40/mx.png",
@@ -231,6 +233,7 @@ tab1, tab2 = st.tabs(["🏆 Leaderboard", "📊 Results"])
 
 with tab1:
     st.subheader("Leaderboard")
+    st.markdown(f"**Scoreboard last updated:** {scoreboard_updated} BST")
     #new_leader = center_columns(leader_sort,['Pos','Points','Gap','Group Stage','Bonus Games'])
     #new_new_leader = highlight_column(new_leader, 'Points')
     #new_new_new_leader = colour_leader(new_new_leader, ["Gap"])
@@ -244,7 +247,7 @@ with tab1:
     #st.markdown(
     #new_new_new_leader_2.to_html(index=False, escape=False),
     #unsafe_allow_html=True)
-    st.markdown(f"**Results last updated:** {results_updated} BST")
+    
     scoreboard_df = center_columns(scoreboard_df,['Pos','Points','Gap','Group Stage','Bonus Points'])
     scoreboard_df = highlight_column(scoreboard_df, 'Points')
     scoreboard_df = colour_leader(scoreboard_df, ["Gap"])
@@ -254,7 +257,7 @@ with tab1:
     
 with tab2:
     st.subheader("Results & Upcoming Fixtures")
-    st.markdown(f"**Scoreboard last updated:** {scoreboard_updated} BST")
+    st.markdown(f"**Results last updated:** {results_updated} BST")
     #results_display = prepare_results_table(new_results)
     #st.markdown(
     #    results_display.to_html(index=False, escape=False),
