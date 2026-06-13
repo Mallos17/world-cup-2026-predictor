@@ -277,34 +277,38 @@ with tab2:
 with tab3:
     st.subheader("Predictions")
     html = player_df.to_html(index=False, escape=False)
-    # Split into rows
-    rows = html.split("</tr>")
 
+    rows = html.split("</tr>")
     new_rows = []
 
     for row in rows:
         if "<tr" not in row:
             continue
 
-        # Split row into cells
-        cells = row.split("</td>")
+        # Split into cells (both <td> and <th>)
+        cells = (
+            row.replace("</th>", "</td>")  # normalize headers to td for splitting
+            .split("</td>")
+            )
+
         new_cells = []
 
         for i, cell in enumerate(cells):
             if "<td" in cell or "<th" in cell:
-                new_cells.append(cell + "</td>")#
-                
-                # Insert separator AFTER col 6, then every 3 cols
-                if (i + 1) >= 5 and (i + 1 - 5) % 3 == 0:
+                # Restore correct closing tag
+                closing = "</th>" if "<th" in cell else "</td>"
+                new_cells.append(cell + closing)
+
+                col_num = i + 1
+
+                # Insert separator AFTER col 6, then 9, 12, 15...
+                if col_num > 6 and (col_num - 6) % 3 == 0:
                     new_cells.append(
                         "<td style='border-right:3px solid #000; padding:0;'></td>"
                         )
 
-        # Rebuild row
-        new_row = "".join(new_cells)
-        new_rows.append(new_row)
+        new_rows.append("".join(new_cells))
 
-    # Reassemble table
     html_with_lines = "</tr>".join(new_rows)
 
     st.markdown(html_with_lines, unsafe_allow_html=True)
