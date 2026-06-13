@@ -51,7 +51,7 @@ def load_sheet_tab(sheet_name, tab_name):
     df = pd.DataFrame(data)
 
     # Return both the data AND the timestamp
-    last_updated = (datetime.utcnow() + timedelta(hours=1)).strftime("%H:%M:%S BST")
+    last_updated = (datetime.utcnow() + timedelta(hours=1)).strftime("%d/%m/%Y %H:%M:%S BST")
 
     return df, last_updated
 
