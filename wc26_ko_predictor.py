@@ -34,11 +34,11 @@ def send_to_google(pred_df, player):
     worksheet.update("A1", [["Player"]])
     worksheet.update("B1", [[player]])
     # 3rd finalist
-    worksheet.update("A1", [["3rd Finalist"]])
-    worksheet.update("B1", [[third_final]])
+    worksheet.update("A2", [["3rd Finalist"]])
+    worksheet.update("B2", [[third_final]])
     # Penalties
-    worksheet.update("A1", [["Penalty Shootouts"]])
-    worksheet.update("B1", [[penalty_match_ids]])
+    worksheet.update("A3", [["Penalty Shootouts"]])
+    worksheet.update("B3", [[penalty_match_ids]])
 
     #worksheet.update([pred_df.columns.values.tolist()] + pred_df.values.tolist())
     worksheet.update("A4", [pred_df.columns.tolist()])
@@ -175,6 +175,7 @@ def team_label(team):
     url = FLAG_URLS.get(team, "")
     return f"<img src='{url}' width='25' style='vertical-align:middle;'> {team}"
 
+@st.cache_data
 def load_sheet_tab(sheet_name, tab_name):
     scope = [
         "https://www.googleapis.com/auth/spreadsheets",
