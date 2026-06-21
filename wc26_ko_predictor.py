@@ -9,7 +9,7 @@ import pandas as pd
 import gspread
 from google.oauth2.service_account import Credentials
 
-def send_to_google(pred_df, player):
+def send_to_google(pred_df, player,penalty_match_ids):
     scope = [
         "https://www.googleapis.com/auth/spreadsheets",
         "https://www.googleapis.com/auth/drive"
@@ -150,7 +150,7 @@ def handle_submit():
         st.error("Please choose a 3rd Place Finalist.")
         return
 
-    send_to_google(st.session_state["pred_df"], ko_player)
+    send_to_google(st.session_state["pred_df"], ko_player,penalty_match_ids)
     st.success("Submitted! Good luck!")
 
 if st.button("Submit Predictions"):
