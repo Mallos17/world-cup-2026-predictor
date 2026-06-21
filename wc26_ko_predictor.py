@@ -150,7 +150,7 @@ def handle_submit():
         st.error("Please choose a 3rd Place Finalist.")
         return
 
-    send_to_google(st.session_state["pred_df"], ko_player,penalty_match_ids)
+    send_to_google(st.session_state["pred_df"], ko_player,st.session_state["penalty_picks"])
     st.success("Submitted! Good luck!")
 
 if st.button("Submit Predictions"):
@@ -564,8 +564,9 @@ with tab_pens:
             max_selections=3
             )
         penalty_match_ids = [label_to_match[l] for l in penalty_choices_labels]
+            
         st.session_state["penalty_picks"] = penalty_match_ids
-
+        
         st.write(f"{penalty_match_ids}")
 
 
