@@ -38,7 +38,7 @@ def send_to_google(pred_df, player,penalty_match_ids):
     worksheet.update("B2", [[third_final]])
     # Penalties
     worksheet.update("A3", [["Penalty Shootouts"]])
-    worksheet.update("B3", [[penalty_match_ids]])
+    worksheet.update("B3", [[", ".join(map(str, penalty_match_ids))]])
 
     #worksheet.update([pred_df.columns.values.tolist()] + pred_df.values.tolist())
     worksheet.update("A4", [pred_df.columns.tolist()])
