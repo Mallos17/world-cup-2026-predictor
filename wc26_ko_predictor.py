@@ -72,6 +72,43 @@ Points are awarded for every correct pick:
 st.write("Enter your predictions below")
 st.write("Once Predictions are complete, hit the below button")
 
+@st.cache_data
+def load_sheet_tab(sheet_name, tab_name):
+    scope = [
+        "https://www.googleapis.com/auth/spreadsheets",
+        "https://www.googleapis.com/auth/drive"
+    ]
+
+    creds_dict = st.secrets["google"]
+    creds = Credentials.from_service_account_info(creds_dict, scopes=scope)
+    
+    client = gspread.authorize(creds)
+    
+    # Open the Google Sheet
+    sheet = client.open(sheet_name)
+
+    # Select the tab (worksheet)
+    worksheet = sheet.worksheet(tab_name)
+
+    # Convert to DataFrame
+    data = worksheet.get_all_records()
+    df = pd.DataFrame(data)
+
+    return df
+
+fixtures = load_sheet_tab("World_Cup_26_KO_Predictor", "KO_Fixtures")
+ko_teams = load_sheet_tab("World_Cup_26_KO_Predictor", "KO_Dict")
+
+#fixtures = pd.read_excel(r"C:\Users\matta\OneDrive\Documents\Matt's Stuff\Footy\World Cup 2026\WC2026_Scoreboard.xlsx",sheet_name="KO_Fixtures")
+#ko_teams = pd.read_excel(r"C:\Users\matta\OneDrive\Documents\Matt's Stuff\Footy\World Cup 2026\WC2026_Scoreboard.xlsx",sheet_name="KO_Dict")
+
+ko_dict = ko_teams.set_index(ko_teams.columns[0])[ko_teams.columns[1]].to_dict()
+
+options = ["Select Team"] + sorted(ko_dict.values())
+third_final = st.selectbox("Choose 3rd Finalist", options)
+if third_final != "Select Team":
+    st.session_state[f"{third_final}"] = third_final
+    
 EXPECTED = {
     "R32": [str(m) for m in range(73, 89)],   # 16 matches
     "R16": [str(m) for m in range(89, 97)],   # 8 matches
@@ -113,7 +150,7 @@ def handle_submit():
         st.error("Please choose a 3rd Place Finalist.")
         return
 
-    #send_to_google(st.session_state["pred_df"], ko_player)
+    send_to_google(st.session_state["pred_df"], ko_player)
     st.success("Submitted! Good luck!")
 
 if st.button("Submit Predictions"):
@@ -175,30 +212,6 @@ def team_label(team):
     url = FLAG_URLS.get(team, "")
     return f"<img src='{url}' width='25' style='vertical-align:middle;'> {team}"
 
-@st.cache_data
-def load_sheet_tab(sheet_name, tab_name):
-    scope = [
-        "https://www.googleapis.com/auth/spreadsheets",
-        "https://www.googleapis.com/auth/drive"
-    ]
-
-    creds_dict = st.secrets["google"]
-    creds = Credentials.from_service_account_info(creds_dict, scopes=scope)
-    
-    client = gspread.authorize(creds)
-    
-    # Open the Google Sheet
-    sheet = client.open(sheet_name)
-
-    # Select the tab (worksheet)
-    worksheet = sheet.worksheet(tab_name)
-
-    # Convert to DataFrame
-    data = worksheet.get_all_records()
-    df = pd.DataFrame(data)
-
-    return df
-
 def resolve_team(code, loser=False):
     # 1. Slot code (1A, 2B, 3F)
     if isinstance(code, str) and code in ko_dict:
@@ -230,18 +243,7 @@ def resolve_team(code, loser=False):
     # 5. Fallback
     return f"Winner M{code}"
 
-fixtures = load_sheet_tab("World_Cup_26_KO_Predictor", "KO_Fixtures")
-ko_teams = load_sheet_tab("World_Cup_26_KO_Predictor", "KO_Dict")
 
-#fixtures = pd.read_excel(r"C:\Users\matta\OneDrive\Documents\Matt's Stuff\Footy\World Cup 2026\WC2026_Scoreboard.xlsx",sheet_name="KO_Fixtures")
-#ko_teams = pd.read_excel(r"C:\Users\matta\OneDrive\Documents\Matt's Stuff\Footy\World Cup 2026\WC2026_Scoreboard.xlsx",sheet_name="KO_Dict")
-
-ko_dict = ko_teams.set_index(ko_teams.columns[0])[ko_teams.columns[1]].to_dict()
-
-options = ["Select Team"] + sorted(ko_dict.values())
-third_final = st.selectbox("Choose 3rd Finalist", options)
-if third_final != "Select Team":
-    st.session_state[f"{third_final}"] = third_final
 #("Pick a '3rd Finalist':", placeholder="Pick your Team")
 
 rounds = {r: g for r, g in fixtures.groupby("Round")}
