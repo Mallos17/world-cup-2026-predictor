@@ -109,7 +109,7 @@ def handle_submit():
         st.error("Please select exactly 3 matches that will go to penalties.")
         return
     
-    if third_final == "Select Team":
+    if third_final not in st.session_state:
         st.error("Please choose a 3rd Place Finalist.")
         return
 
@@ -240,6 +240,8 @@ ko_dict = ko_teams.set_index(ko_teams.columns[0])[ko_teams.columns[1]].to_dict()
 
 options = ["Select Team"] + sorted(ko_dict.values())
 third_final = st.selectbox("Choose 3rd Finalist", options)
+if third_final != "Select Team":
+    st.session_state[f"{third_final}"] = third_final
 #("Pick a '3rd Finalist':", placeholder="Pick your Team")
 
 rounds = {r: g for r, g in fixtures.groupby("Round")}
@@ -502,7 +504,7 @@ with tab_final:
                 "Result":result,
                 "Pos":[key for key, val in ko_dict.items() if val == result]
                 })
-        st.write("DEBUG FINAL KEY:", [k for k in st.session_state.keys() if "winner" in k])
+        
 import re
 
 ORDER = {
