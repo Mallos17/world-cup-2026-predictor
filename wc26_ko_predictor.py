@@ -296,7 +296,7 @@ with tab_r32:
                 "Team A":team_a,
                 "Team B":team_b,
                 "Result":result,
-                "Pos":[key for key, val in ko_dict.items() if val == result]
+                "Pos": ", ".join([key for key, val in ko_dict.items() if val == result])
                 })
         
 
@@ -343,7 +343,7 @@ with tab_r16:
                 "Team A":team_a,
                 "Team B":team_b,
                 "Result":result,
-                "Pos":[key for key, val in ko_dict.items() if val == result]
+                "Pos": ", ".join([key for key, val in ko_dict.items() if val == result])
                 })
 
 with tab_qf:
@@ -384,7 +384,7 @@ with tab_qf:
                 "Team A":team_a,
                 "Team B":team_b,
                 "Result":result,
-                "Pos":[key for key, val in ko_dict.items() if val == result]
+                "Pos": ", ".join([key for key, val in ko_dict.items() if val == result])
                 })
 
 with tab_sf:
@@ -428,7 +428,7 @@ with tab_sf:
                 "Team A":team_a,
                 "Team B":team_b,
                 "Result":result,
-                "Pos":[key for key, val in ko_dict.items() if val == result]
+                "Pos": ", ".join([key for key, val in ko_dict.items() if val == result])
                 })
 
 with tab_third:
@@ -466,7 +466,7 @@ with tab_third:
                 "Team A":team_a,
                 "Team B":team_b,
                 "Result":result,
-                "Pos":[key for key, val in ko_dict.items() if val == result]
+                "Pos": ", ".join([key for key, val in ko_dict.items() if val == result])
                 })
 
 with tab_final:
@@ -504,7 +504,7 @@ with tab_final:
                 "Team A":team_a,
                 "Team B":team_b,
                 "Result":result,
-                "Pos":[key for key, val in ko_dict.items() if val == result]
+                "Pos": ", ".join([key for key, val in ko_dict.items() if val == result])
                 })
         
 import re
