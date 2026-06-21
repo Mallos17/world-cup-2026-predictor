@@ -23,7 +23,7 @@ def send_to_google(pred_df, player,penalty_match_ids):
     creds = Credentials.from_service_account_info(creds_dict,scopes=scope)
     
     client = gspread.authorize(creds)
-    sh = client.open("World_Cup_26_Predictor")
+    sh = client.open("World_Cup_26_KO_Predictor")
     try:
         worksheet = sh.add_worksheet(title=player, rows=100, cols=20)
     except gspread.exceptions.APIError:
