@@ -24,6 +24,8 @@ st.markdown("""
 - **1 point** for being within 1 of correct margin (must have correct result)  
 - **4 points** for correctly predicting a **draw**  
 - **3 points per goal** scored in your selected **BONUS games**
+- **25 points** for **Winner**
+- **15 points** for **Golden Boot**
 
 Keep an eye out for the **Knockouts Predictor**
 """)
@@ -247,7 +249,7 @@ with tab1:
     #new_new_new_leader_2.to_html(index=False, escape=False),
     #unsafe_allow_html=True)
     
-    scoreboard_df = center_columns(scoreboard_df,['Pos','Points','Gap','Group Stage','Bonus Points'])
+    scoreboard_df = center_columns(scoreboard_df,['Pos','Points','Gap','Group Stage','Bonus Points','Winner',])
     scoreboard_df = highlight_column(scoreboard_df, 'Points')
     scoreboard_df = colour_leader(scoreboard_df, ["Gap"])
     st.markdown(
