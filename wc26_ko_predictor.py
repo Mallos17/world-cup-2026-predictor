@@ -384,6 +384,11 @@ with tab_qf:
             st.session_state[f"winner_{match_id}"] = result
         prediction_complete = result is not None
         
+        if result == team_a:
+            match_pos = m1
+        elif result == team_b:
+            match_pos = m2
+        
         if prediction_complete:
             predictions.append({
                 "Match":match_id,
@@ -392,7 +397,7 @@ with tab_qf:
                 "Team B":team_b,
                 "Result":result,
                 "Grp_Pos": ", ".join([key for key, val in ko_dict.items() if val == result]),
-                "M_Pos":match_id
+                "M_Pos":match_pos
                 })
 
 with tab_sf:
@@ -429,6 +434,11 @@ with tab_sf:
         
         prediction_complete = result is not None
         
+        if result == team_a:
+            match_pos = m1
+        elif result == team_b:
+            match_pos = m2
+        
         if prediction_complete:
             predictions.append({
                 "Match":match_id,
@@ -437,7 +447,7 @@ with tab_sf:
                 "Team B":team_b,
                 "Result":result,
                 "Grp_Pos": ", ".join([key for key, val in ko_dict.items() if val == result]),
-                "M_Pos":match_id
+                "M_Pos":match_pos
                 })
 
 with tab_third:
@@ -468,6 +478,11 @@ with tab_third:
             st.session_state[f"winner_{match_id}"] = result
         prediction_complete = result is not None
         
+        if result == team_a:
+            match_pos = m1
+        elif result == team_b:
+            match_pos = m2
+            
         if prediction_complete:
             predictions.append({
                 "Match":match_id,
@@ -476,7 +491,7 @@ with tab_third:
                 "Team B":team_b,
                 "Result":result,
                 "Grp_Pos": ", ".join([key for key, val in ko_dict.items() if val == result]),
-                "M_Pos":match_id
+                "M_Pos":match_pos
                 })
 
 with tab_final:
@@ -507,6 +522,11 @@ with tab_final:
             st.session_state[f"winner_{match_id}"] = result
         prediction_complete = result is not None
         
+        if result == team_a:
+            match_pos = m1
+        elif result == team_b:
+            match_pos = m2
+        
         if prediction_complete:
             predictions.append({
                 "Match":match_id,
@@ -515,7 +535,7 @@ with tab_final:
                 "Team B":team_b,
                 "Result":result,
                 "Grp_Pos": ", ".join([key for key, val in ko_dict.items() if val == result]),
-                "M_Pos":match_id
+                "M_Pos":match_pos
                 })
         
 import re
