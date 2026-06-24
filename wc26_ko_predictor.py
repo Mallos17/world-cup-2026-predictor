@@ -63,6 +63,7 @@ Points are awarded for every correct pick:
 - **12 points** for each Semi Final winner 
 - **10 points** for 3rd Place Playoff winner
 - **18 points** for Final winner (**can** be different from your pick during the Group Stage, these are separate from each other)
+
 If your predicted team gets knocked out but you had them winning again in the next round, your pick automatically switches to the team that eliminated them - but you only earn **half points** for that match.
 
 Example:  
