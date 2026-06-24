@@ -337,6 +337,11 @@ with tab_r16:
             st.session_state[f"winner_{match_id}"] = result
         prediction_complete = result is not None
         
+        if result == team_a:
+            match_pos = m1
+        elif result == team_b:
+            match_pos = m2
+        
         if prediction_complete:
             predictions.append({
                 "Match":match_id,
