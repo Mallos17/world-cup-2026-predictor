@@ -296,7 +296,8 @@ with tab_r32:
                 "Team A":team_a,
                 "Team B":team_b,
                 "Result":result,
-                "Pos": ", ".join([key for key, val in ko_dict.items() if val == result])
+                "Grp_Pos": ", ".join([key for key, val in ko_dict.items() if val == result]),
+                "M_Pos":match_id
                 })
         
 
@@ -343,7 +344,8 @@ with tab_r16:
                 "Team A":team_a,
                 "Team B":team_b,
                 "Result":result,
-                "Pos": ", ".join([key for key, val in ko_dict.items() if val == result])
+                "Grp_Pos": ", ".join([key for key, val in ko_dict.items() if val == result]),
+                "M_Pos":match_id
                 })
 
 with tab_qf:
@@ -384,7 +386,8 @@ with tab_qf:
                 "Team A":team_a,
                 "Team B":team_b,
                 "Result":result,
-                "Pos": ", ".join([key for key, val in ko_dict.items() if val == result])
+                "Grp_Pos": ", ".join([key for key, val in ko_dict.items() if val == result]),
+                "M_Pos":match_id
                 })
 
 with tab_sf:
@@ -428,7 +431,8 @@ with tab_sf:
                 "Team A":team_a,
                 "Team B":team_b,
                 "Result":result,
-                "Pos": ", ".join([key for key, val in ko_dict.items() if val == result])
+                "Grp_Pos": ", ".join([key for key, val in ko_dict.items() if val == result]),
+                "M_Pos":match_id
                 })
 
 with tab_third:
@@ -466,7 +470,8 @@ with tab_third:
                 "Team A":team_a,
                 "Team B":team_b,
                 "Result":result,
-                "Pos": ", ".join([key for key, val in ko_dict.items() if val == result])
+                "Grp_Pos": ", ".join([key for key, val in ko_dict.items() if val == result]),
+                "M_Pos":match_id
                 })
 
 with tab_final:
@@ -504,7 +509,8 @@ with tab_final:
                 "Team A":team_a,
                 "Team B":team_b,
                 "Result":result,
-                "Pos": ", ".join([key for key, val in ko_dict.items() if val == result])
+                "Grp_Pos": ", ".join([key for key, val in ko_dict.items() if val == result]),
+                "M_Pos":match_id
                 })
         
 import re
