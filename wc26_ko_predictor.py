@@ -58,12 +58,15 @@ There are still lots of points up for grabs so plenty of time to catch the front
 
 Points are awarded for every correct pick:
 - **3 points** for each correct Round of 32 winner
-- **4 points** for each correct Round of 16 winner
-- **6 points** for each Quarter Final winner
-- **8 points** for each Semi Final winner 
-- **6 points** for 3rd Place Playoff winner
-- **12 points** for Final winner (**can** be different from your pick during the Group Stage, these are separate from each other)
+- **6 points** for each correct Round of 16 winner
+- **8 points** for each Quarter Final winner
+- **12 points** for each Semi Final winner 
+- **10 points** for 3rd Place Playoff winner
+- **18 points** for Final winner (**can** be different from your pick during the Group Stage, these are separate from each other)
+If your predicted team gets knocked out but you had them winning again in the next round, your pick automatically switches to the team that eliminated them - but you only earn **half points** for that match.
 
+Example:  
+You pick **USA** to win their Round of 16 match and their Quarter-Final. But USA lose to **Belgium** in the Round of 16. Your Quarter‑Final pick becomes Belgium, but you’ll only score **half points** if Belgium win that Quarter-Final (4 points).
 - Select 3 games you think will have a **Penalty Shootout** - **5 points** for each correct game
 - **6 points** are available for a "3rd Finalist" - an extra team you think might make the final that you haven't picked to make it
 """)
@@ -302,7 +305,7 @@ with tab_r32:
         
 
 with tab_r16:
-    st.subheader("Round of 16 – 4pts each")
+    st.subheader("Round of 16 – 6pts each")
 
     r16_pairs = [
         (74, 77),
@@ -354,7 +357,7 @@ with tab_r16:
                 })
 
 with tab_qf:
-    st.subheader("Quarter Finals – 6pts each")
+    st.subheader("Quarter Finals – 8pts each")
     qf_pairs = [
         (89, 90),
         (93, 94),
@@ -401,7 +404,7 @@ with tab_qf:
                 })
 
 with tab_sf:
-    st.subheader("Semi Finals – 8pts each")
+    st.subheader("Semi Finals – 12pts each")
     sf_pairs = [
         ("QF1", "QF2"),
         ("QF3", "QF4"),
@@ -451,7 +454,7 @@ with tab_sf:
                 })
 
 with tab_third:
-    st.subheader("3rd Place Final – 6pts")
+    st.subheader("3rd Place Final – 10pts")
     third_pairs = [
         ("SF1", "SF2")
     ]
@@ -495,7 +498,7 @@ with tab_third:
                 })
 
 with tab_final:
-    st.subheader("FINAL – 12pts")
+    st.subheader("FINAL – 18pts")
     f_pairs = [
         ("SF1", "SF2")
     ]
