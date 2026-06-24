@@ -350,7 +350,7 @@ with tab_r16:
                 "Team B":team_b,
                 "Result":result,
                 "Grp_Pos": ", ".join([key for key, val in ko_dict.items() if val == result]),
-                "M_Pos":match_id
+                "M_Pos":match_pos
                 })
 
 with tab_qf:
