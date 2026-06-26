@@ -314,7 +314,7 @@ player_columns = {
 
 
 
-tab1, tab2, tab3, tab4 = st.tabs(["🏆 Leaderboard", "📊 Results","RETIRED","🔮 Player Predictions"])
+tab1, tab2, tab4 = st.tabs(["🏆 Leaderboard", "📊 Results","🔮 Player Predictions"])
 
 with tab1:
     st.subheader("Leaderboard")
@@ -400,7 +400,7 @@ with tab2:
 #    st.markdown(html_with_lines, unsafe_allow_html=True)
 
 with tab4:
-    st.subheader("TESTING")
+    st.subheader("Player Predictions")
     base_cols = ["Match", "Group", "Team A", "Team B", "AS", "BS"]
 
     player_options = ["All Players"] + sorted(player_columns.keys())
