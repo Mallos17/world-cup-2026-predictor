@@ -230,6 +230,10 @@ scoreboard_df = scoreboard_df.sort_values(
 #scoreboard_df = scoreboard_df.drop(columns=['Knockouts'])
 
 player_columns = {
+    "Player Stats": [
+        "team_a",
+        "draw",
+        "team_b"],
     "Matt Allen": [
         "Matt Allen-Pred",
         "Matt Allen-Mg",
@@ -401,10 +405,19 @@ with tab2:
 
 with tab4:
     st.subheader("Player Predictions")
+    # Columns that should always appear
     base_cols = ["Match", "Group", "Team A", "Team B", "AS", "BS"]
 
-    player_options = ["All Players"] + sorted(player_columns.keys())
+    # Pin "Player Stats" at the top
+    pinned = ["Player Stats"]
 
+    # Sort all player names except the pinned one
+    others = sorted([p for p in player_columns.keys() if p not in pinned])
+
+    # Build final dropdown list
+    player_options = pinned + ["All Players"] + others
+
+    # Multiselect dropdown
     players = st.multiselect(
         "Choose players",
         player_options
@@ -414,15 +427,19 @@ with tab4:
     if "All Players" in players:
         players = list(player_columns.keys())
 
+    # If "Player Stats" is selected, handle it separately if needed
+    # (Right now it will just be ignored unless you define what it means)
+    players = [p for p in players if p in player_columns]
+
     # Collect all selected player columns
     selected_player_cols = []
     for p in players:
         selected_player_cols.extend(player_columns[p])
 
+    # Final columns to show
     cols_to_show = base_cols + selected_player_cols
 
+    # Display
     st.dataframe(player_df[cols_to_show])
-
-
 
 #st.dataframe(leader_sort,hide_index=True)
