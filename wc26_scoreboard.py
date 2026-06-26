@@ -229,8 +229,92 @@ scoreboard_df = scoreboard_df.sort_values(
 ).reset_index(drop=True)
 #scoreboard_df = scoreboard_df.drop(columns=['Knockouts'])
 
+player_columns = {
+    "Matt Allen": [
+        "Matt Allen-Pred",
+        "Matt Allen-Mg",
+        "Matt Allen-Bonus"
+    ],
+    "Steve Allen": [
+        "Steve Allen-Pred",
+        "Steve Allen-Mg",
+        "Steve Allen-Bonus"
+    ],
+    "Cameron Russell": [
+        "Cameron Russell-Pred",
+        "Cameron Russell-Mg",
+        "Cameron Russell-Bonus"
+    ],
+    "Hamish MacCaig": [
+        "Hamish MacCaig-Pred",
+        "Hamish MacCaig-Mg",
+        "Hamish MacCaig-Bonus"
+    ],
+    "Mark Mooney": [
+        "Mark Mooney-Pred",
+        "Mark Mooney-Mg",
+        "Mark Mooney-Bonus"
+    ],
+    "Samantha Allen": [
+        "Samantha Allen-Pred",
+        "Samantha Allen-Mg",
+        "Samantha Allen-Bonus"
+    ],
+    "Molly Wedge": [
+        "Molly Wedge-Pred",
+        "Molly Wedge-Mg",
+        "Molly Wedge-Bonus"
+    ],
+    "Chris Allen": [
+        "Chris Allen-Pred",
+        "Chris Allen-Mg",
+        "Chris Allen-Bonus"
+    ],
+    "Matthew Drury": [
+        "Matthew Drury-Pred",
+        "Matthew Drury-Mg",
+        "Matthew Drury-Bonus"
+    ],
+    "Hugh Cunningham": [
+        "Hugh Cunningham-Pred",
+        "Hugh Cunningham-Mg",
+        "Hugh Cunningham-Bonus"
+    ],
+    "Greg Donaldson": [
+        "Greg Donaldson-Pred",
+        "Greg Donaldson-Mg",
+        "Greg Donaldson-Bonus"
+    ],
+    "Matthew Bottrill": [
+        "Matthew Bottrill-Pred",
+        "Matthew Bottrill-Mg",
+        "Matthew Bottrill-Bonus"
+    ],
+    "James Wilton": [
+        "James Wilton-Pred",
+        "James Wilton-Mg",
+        "James Wilton-Bonus"
+    ],
+    "Rob Allen": [
+        "Rob Allen-Pred",
+        "Rob Allen-Mg",
+        "Rob Allen-Bonus"
+    ],
+    "Duncan Bruce": [
+        "Duncan Bruce-Pred",
+        "Duncan Bruce-Mg",
+        "Duncan Bruce-Bonus"
+    ],
+    "Aimee B": [
+        "Aimee B-Pred",
+        "Aimee B-Mg",
+        "Aimee B-Bonus"
+    ]
+}
 
-tab1, tab2, tab3 = st.tabs(["🏆 Leaderboard", "📊 Results","🔮 Player Predictions"])
+
+
+tab1, tab2, tab3, tab4 = st.tabs(["🏆 Leaderboard", "📊 Results","🔮 Player Predictions","TEST"])
 
 with tab1:
     st.subheader("Leaderboard")
@@ -282,7 +366,11 @@ with tab3:
 
     rows = html.split("</tr>")
     new_rows = []
-
+    
+    #player = st.selectbox("Choose a player", sorted(player_columns.keys()))
+    #cols = player_columns[player]
+    #st.dataframe(df[cols])
+    
     for row in rows:
         if "<tr" not in row:
             continue
@@ -313,5 +401,14 @@ with tab3:
 
     html_with_lines = "</tr>".join(new_rows)
     st.markdown(html_with_lines, unsafe_allow_html=True)
+
+with tab4:
+    st.subheader("TESTING")
+    
+    base_cols = ["Match", "Group", "Team A", "Team B", "AS", "BS"]
+    player = st.selectbox("Choose a player", sorted(player_columns.keys()))
+    cols_to_show = base_cols + player_columns[player]
+    st.dataframe(player_df[cols_to_show])
+
 
 #st.dataframe(leader_sort,hide_index=True)
