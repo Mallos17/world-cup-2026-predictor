@@ -314,7 +314,7 @@ player_columns = {
 
 
 
-tab1, tab2, tab3, tab4 = st.tabs(["🏆 Leaderboard", "📊 Results","🔮 Player Predictions","TEST"])
+tab1, tab2, tab3, tab4 = st.tabs(["🏆 Leaderboard", "📊 Results","RETIRED","🔮 Player Predictions"])
 
 with tab1:
     st.subheader("Leaderboard")
@@ -360,47 +360,44 @@ with tab2:
         unsafe_allow_html=True
     )
 
-with tab3:
-    st.subheader("Predictions")
-    html = player_df.to_html(index=False, escape=False)
+####RETIRING TAB3#######
+#with tab3:
+#    st.subheader("Predictions")
+#    html = player_df.to_html(index=False, escape=False)
 
-    rows = html.split("</tr>")
-    new_rows = []
+#    rows = html.split("</tr>")
+#    new_rows = []
     
-    #player = st.selectbox("Choose a player", sorted(player_columns.keys()))
-    #cols = player_columns[player]
-    #st.dataframe(df[cols])
-    
-    for row in rows:
-        if "<tr" not in row:
-            continue
+#    for row in rows:
+#        if "<tr" not in row:
+#            continue
 
         # Split into cells (both <td> and <th>)
-        cells = (
-            row.replace("</th>", "</td>")  # normalize headers to td for splitting
-            .split("</td>")
-            )
+#        cells = (
+#            row.replace("</th>", "</td>")  # normalize headers to td for splitting
+#            .split("</td>")
+#            )
 
-        new_cells = []
+#        new_cells = []
 
-        for i, cell in enumerate(cells):
-            if "<td" in cell or "<th" in cell:
+#        for i, cell in enumerate(cells):
+#            if "<td" in cell or "<th" in cell:
                 # Restore correct closing tag
-                closing = "</th>" if "<th" in cell else "</td>"
-                new_cells.append(cell + closing)
+#                closing = "</th>" if "<th" in cell else "</td>"
+#                new_cells.append(cell + closing)
 
-                col_num = i + 1
+#                col_num = i + 1
 
                 # Insert separator AFTER col 6, then 9, 12, 15...
-                if col_num > 3 and (col_num - 3) % 3 == 0:
-                    new_cells.append(
-                        "<td style='border-right:3px solid #000; padding:0;'></td>"
-                        )
+#                if col_num > 3 and (col_num - 3) % 3 == 0:
+#                   new_cells.append(
+#                        "<td style='border-right:3px solid #000; padding:0;'></td>"
+#                        )
 
-        new_rows.append("".join(new_cells))
+#        new_rows.append("".join(new_cells))
 
-    html_with_lines = "</tr>".join(new_rows)
-    st.markdown(html_with_lines, unsafe_allow_html=True)
+#    html_with_lines = "</tr>".join(new_rows)
+#    st.markdown(html_with_lines, unsafe_allow_html=True)
 
 with tab4:
     st.subheader("TESTING")
