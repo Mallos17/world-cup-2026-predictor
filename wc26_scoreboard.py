@@ -404,11 +404,28 @@ with tab3:
 
 with tab4:
     st.subheader("TESTING")
-    
     base_cols = ["Match", "Group", "Team A", "Team B", "AS", "BS"]
-    player = st.selectbox("Choose a player", sorted(player_columns.keys()))
-    cols_to_show = base_cols + player_columns[player]
+
+    player_options = ["All Players"] + sorted(player_columns.keys())
+
+    players = st.multiselect(
+        "Choose players",
+        player_options
+        )
+
+    # If "All Players" is selected, include everyone
+    if "All Players" in players:
+        players = list(player_columns.keys())
+
+    # Collect all selected player columns
+    selected_player_cols = []
+    for p in players:
+        selected_player_cols.extend(player_columns[p])
+
+    cols_to_show = base_cols + selected_player_cols
+
     st.dataframe(player_df[cols_to_show])
+
 
 
 #st.dataframe(leader_sort,hide_index=True)
