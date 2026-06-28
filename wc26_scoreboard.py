@@ -227,7 +227,7 @@ results_df = results_df[results_df['MD']<md_dict.get((date.today() + timedelta(d
 results_df = results_df.drop(columns=['MD'])
 
 scoreboard_df = scoreboard_df.sort_values(
-    by=["Points","Group Stage"],
+    by=["Points","Groups"],
     ascending=[False, False]
 ).reset_index(drop=True)
 #scoreboard_df = scoreboard_df.drop(columns=['Knockouts'])
@@ -384,7 +384,7 @@ with tab1:
     #new_new_new_leader_2.to_html(index=False, escape=False),
     #unsafe_allow_html=True)
     
-    scoreboard_df = center_columns(scoreboard_df,['Pos','Points','Gap','Knockouts','Group Stage','Winner',])
+    scoreboard_df = center_columns(scoreboard_df,['Pos','Points','Gap','KOs','Groups','Winner',])
     scoreboard_df = highlight_column(scoreboard_df, 'Points')
     scoreboard_df = colour_leader(scoreboard_df, ["Gap"])
     st.markdown(
