@@ -19,18 +19,20 @@ st.title("World Cup Prediction Scoreboard")
 st.markdown("""
 ## 🏆 Points System Reminder
 
-- **3 points** for correct result  
-- **2 points** for correct margin (must have correct result)  
-- **1 point** for being within 1 of correct margin (must have correct result)  
-- **4 points** for correctly predicting a **draw**  
-- **3 points per goal** scored in your selected **BONUS games**
+- **3 points** for each correct Round of 32 winner
+- **6 points** for each correct Round of 16 winner
+- **8 points** for each Quarter Final winner
+- **12 points** for each Semi Final winner 
+- **10 points** for 3rd Place Playoff winner
+- **18 points** for Final winner
+- **Half points** for a correct inherited winner
 - **20 points** for **Winner**
 - **10 points** for **Golden Boot**
 
 Keep an eye out for the **Knockouts Predictor**
 """)
 
-@st.cache_data(ttl=120)  # cache for 5 minutes
+@st.cache_data  # cache for 5 minutes
 def load_sheet_tab(sheet_name, tab_name):
     scope = [
         "https://www.googleapis.com/auth/spreadsheets",
