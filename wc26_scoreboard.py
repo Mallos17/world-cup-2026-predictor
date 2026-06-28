@@ -59,8 +59,8 @@ def load_sheet_tab(sheet_name, tab_name):
 
 results_df, results_updated = load_sheet_tab("World_Cup_2026_Scoreboard", "Results")
 scoreboard_df, scoreboard_updated = load_sheet_tab("World_Cup_2026_Scoreboard", "Scoreboard")
-player_df, player_updated = load_sheet_tab("World_Cup_2026_Scoreboard", "Copy of Player_Pred")
-
+#player_df, player_updated = load_sheet_tab("World_Cup_2026_Scoreboard", "Copy of Player_Pred")
+ko_df, ko_updated = load_sheet_tab("World_Cup_2026_Scoreboard", "Knockouts")
 FLAG_URLS = {
     "Mexico": "https://flagcdn.com/w40/mx.png",
     "South Africa": "https://flagcdn.com/w40/za.png",
@@ -195,6 +195,7 @@ md_dict = {'2026-06-11':1,'2026-06-12':2,'2026-06-13':3,'2026-06-14':4,
            '2026-06-23':13,'2026-06-24':14,'2026-06-25':15,'2026-06-26':16,
            '2026-06-27':17,'2026-06-28':18,'2026-06-29':19}
 
+ko_md_dict = {}
 #scoreboard = load_scoreboard()
 #leader_sort = leaderboard.sort_values(
 #    by=["Pos","Group Stage"],
@@ -233,7 +234,8 @@ player_columns = {
     "Player Stats": [
         "team_a",
         "draw",
-        "team_b"],
+        "team_b"
+    ],
     "Matt Allen": [
         "Matt Allen-Pred",
         "Matt Allen-Mg",
@@ -317,7 +319,6 @@ player_columns = {
 }
 
 
-
 tab1, tab2, tab4 = st.tabs(["🏆 Leaderboard", "📊 Results","🔮 Player Predictions"])
 
 with tab1:
@@ -337,7 +338,7 @@ with tab1:
     #new_new_new_leader_2.to_html(index=False, escape=False),
     #unsafe_allow_html=True)
     
-    scoreboard_df = center_columns(scoreboard_df,['Pos','Points','Gap','Group Stage','Bonus Points','Winner',])
+    scoreboard_df = center_columns(scoreboard_df,['Pos','Points','Gap','Knockouts','Group Stage','Winner',])
     scoreboard_df = highlight_column(scoreboard_df, 'Points')
     scoreboard_df = colour_leader(scoreboard_df, ["Gap"])
     st.markdown(
@@ -358,7 +359,7 @@ with tab2:
     #    unsafe_allow_html=True
     #)
     
-    results_display = prepare_results_table(results_df)
+    results_display = prepare_results_table(ko_df)
     st.markdown(
         results_display.to_html(index=False, escape=False),
         unsafe_allow_html=True
