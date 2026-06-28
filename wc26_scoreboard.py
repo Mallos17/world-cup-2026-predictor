@@ -59,8 +59,9 @@ def load_sheet_tab(sheet_name, tab_name):
 
 results_df, results_updated = load_sheet_tab("World_Cup_2026_Scoreboard", "Results")
 scoreboard_df, scoreboard_updated = load_sheet_tab("World_Cup_2026_Scoreboard", "Scoreboard")
-#player_df, player_updated = load_sheet_tab("World_Cup_2026_Scoreboard", "Copy of Player_Pred")
+player_df, player_updated = load_sheet_tab("World_Cup_2026_Scoreboard", "Copy of Player_Pred")
 ko_df, ko_updated = load_sheet_tab("World_Cup_2026_Scoreboard", "Knockouts")
+
 FLAG_URLS = {
     "Mexico": "https://flagcdn.com/w40/mx.png",
     "South Africa": "https://flagcdn.com/w40/za.png",
@@ -195,7 +196,6 @@ md_dict = {'2026-06-11':1,'2026-06-12':2,'2026-06-13':3,'2026-06-14':4,
            '2026-06-23':13,'2026-06-24':14,'2026-06-25':15,'2026-06-26':16,
            '2026-06-27':17,'2026-06-28':18,'2026-06-29':19}
 
-ko_md_dict = {}
 #scoreboard = load_scoreboard()
 #leader_sort = leaderboard.sort_values(
 #    by=["Pos","Group Stage"],
@@ -229,6 +229,48 @@ scoreboard_df = scoreboard_df.sort_values(
     ascending=[False, False]
 ).reset_index(drop=True)
 #scoreboard_df = scoreboard_df.drop(columns=['Knockouts'])
+
+# Your key dates
+date_A = pd.to_datetime("2026-07-03")
+date_B = pd.to_datetime("2026-07-05")
+date_C = pd.to_datetime("2026-07-07")
+date_D = pd.to_datetime("2026-07-10")
+date_E = pd.to_datetime("2026-07-12")
+date_F = pd.to_datetime("2026-07-15")
+date_G = pd.to_datetime("2026-07-16")
+
+# Today or selected date
+selected_date = date.today()
+selected_date = pd.to_datetime(selected_date)
+
+# Logic for which rounds to show
+if selected_date < date_A:
+    allowed_rounds = ["R32"]
+
+elif date_A <= selected_date < date_B:
+    allowed_rounds = ["R32", "R16"]
+
+elif date_B <= selected_date < date_C:
+    allowed_rounds = ["R16"]
+    
+elif date_C <= selected_date < date_D:
+    allowed_rounds = ["R16","QF"]
+
+elif date_D <= selected_date < date_E:
+    allowed_rounds = ["QF"]
+
+elif date_E <= selected_date < date_F:
+    allowed_rounds = ["QF","SF"]
+
+elif date_F <= selected_date < date_G:
+    allowed_rounds = ["SF"]
+
+else:
+    allowed_rounds = ["SF","3F", "F"]  # optional future rounds
+
+# Filter your dataframe
+filtered_df = ko_df[ko_df["Round"].isin(allowed_rounds)]
+
 
 player_columns = {
     "Player Stats": [
@@ -319,7 +361,9 @@ player_columns = {
 }
 
 
-tab1, tab2, tab4 = st.tabs(["🏆 Leaderboard", "📊 Results","🔮 Player Predictions"])
+tab1, tab2 = st.tabs(["🏆 Leaderboard", "📊 Results"])
+
+#tab4:,"🔮 Player Predictions"
 
 with tab1:
     st.subheader("Leaderboard")
@@ -359,7 +403,7 @@ with tab2:
     #    unsafe_allow_html=True
     #)
     
-    results_display = prepare_results_table(ko_df)
+    results_display = prepare_results_table(filtered_df)
     st.markdown(
         results_display.to_html(index=False, escape=False),
         unsafe_allow_html=True
@@ -404,43 +448,43 @@ with tab2:
 #    html_with_lines = "</tr>".join(new_rows)
 #    st.markdown(html_with_lines, unsafe_allow_html=True)
 
-with tab4:
-    st.subheader("Player Predictions")
-    # Columns that should always appear
-    base_cols = ["Match", "Group", "Team A", "Team B", "AS", "BS"]
+#with tab4:
+#    st.subheader("Player Predictions")
+#    # Columns that should always appear
+#    base_cols = ["Match", "Group", "Team A", "Team B", "AS", "BS"]
 
     # Pin "Player Stats" at the top
-    pinned = ["Player Stats"]
+#    pinned = ["Player Stats"]
 
     # Sort all player names except the pinned one
-    others = sorted([p for p in player_columns.keys() if p not in pinned])
+#    others = sorted([p for p in player_columns.keys() if p not in pinned])
 
     # Build final dropdown list
-    player_options = pinned + ["All Players"] + others
+#    player_options = pinned + ["All Players"] + others
 
     # Multiselect dropdown
-    players = st.multiselect(
-        "Choose players",
-        player_options
-        )
+#    players = st.multiselect(
+#        "Choose players",
+#        player_options
+#        )
 
     # If "All Players" is selected, include everyone
-    if "All Players" in players:
-        players = list(player_columns.keys())
+#    if "All Players" in players:
+#        players = list(player_columns.keys())
 
     # If "Player Stats" is selected, handle it separately if needed
     # (Right now it will just be ignored unless you define what it means)
-    players = [p for p in players if p in player_columns]
+#    players = [p for p in players if p in player_columns]
 
     # Collect all selected player columns
-    selected_player_cols = []
-    for p in players:
-        selected_player_cols.extend(player_columns[p])
+#    selected_player_cols = []
+#    for p in players:
+#        selected_player_cols.extend(player_columns[p])
 
     # Final columns to show
-    cols_to_show = base_cols + selected_player_cols
+#    cols_to_show = base_cols + selected_player_cols
 
     # Display
-    st.dataframe(player_df[cols_to_show])
+#    st.dataframe(player_df[cols_to_show])
 
 #st.dataframe(leader_sort,hide_index=True)
