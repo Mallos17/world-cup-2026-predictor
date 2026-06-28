@@ -26,13 +26,13 @@ st.markdown("""
 - **10 points** for 3rd Place Playoff winner
 - **18 points** for Final winner
 - **Half points** for a correct inherited winner
+
 - **20 points** for **Winner**
 - **10 points** for **Golden Boot**
 
-Keep an eye out for the **Knockouts Predictor**
 """)
 
-@st.cache_data  # cache for 5 minutes
+@st.cache_data(ttl=120)  # cache for 5 minutes
 def load_sheet_tab(sheet_name, tab_name):
     scope = [
         "https://www.googleapis.com/auth/spreadsheets",
