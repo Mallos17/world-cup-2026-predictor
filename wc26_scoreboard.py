@@ -179,7 +179,7 @@ def prepare_results_table(df):
     df["-"] = df["-"].apply(lambda x: f"<div style='text-align:center;'>{x}</div>")
     
     df["Date"] = pd.to_datetime(df["Date"], errors="coerce")
-    df["Date"] = df["Date"].dt.strftime("%d-%M")
+    df["Date"] = df["Date"].dt.strftime("%d-%b")
 
     df["Time (BST)"] = df["Time (BST)"].astype(str).str.slice(0, 5)
 
