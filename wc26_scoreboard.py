@@ -178,6 +178,8 @@ def prepare_results_table(df):
     df["BS"] = df["BS"].apply(lambda x: f"<div style='text-align:center;'>{x}</div>")
     df["-"] = df["-"].apply(lambda x: f"<div style='text-align:center;'>{x}</div>")
     
+    df["Date"] = df["Date"].dt.strftime("%d-%m")
+
     df["Time (BST)"] = df["Time (BST)"].astype(str).str.slice(0, 5)
 
     # --- 4. Centre the dash column if you have one ---
