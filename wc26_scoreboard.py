@@ -63,6 +63,7 @@ results_df, results_updated = load_sheet_tab("World_Cup_2026_Scoreboard", "Resul
 scoreboard_df, scoreboard_updated = load_sheet_tab("World_Cup_2026_Scoreboard", "Scoreboard")
 player_df, player_updated = load_sheet_tab("World_Cup_2026_Scoreboard", "Copy of Player_Pred")
 ko_df, ko_updated = load_sheet_tab("World_Cup_2026_Scoreboard", "Knockouts")
+player_ko_df, player_ko_updated = load_sheet_tab("World_Cup_2026_Scoreboard", "Copy of KO_Pred")
 
 FLAG_URLS = {
     "Mexico": "https://flagcdn.com/w40/mx.png",
@@ -366,7 +367,13 @@ player_columns = {
 }
 
 
-tab1, tab2 = st.tabs(["🏆 Leaderboard", "📊 Results"])
+ko_player_columns = ["Matt Allen","Steve Allen","Cameron Russell",
+                     "Hamish MacCaig","Mark Mooney","Samantha Allen",
+                     "Molly Wedge","Chris Allen","Matthew Drury",
+                     "Hugh Cunningham","Greg Donaldson","Matthew Bottrill",
+                     "James Wilton","Rob Allen","Duncan Bruce","Aimee B"]
+
+tab1, tab2, tab5 = st.tabs(["🏆 Leaderboard", "📊 Results", "🔮 Player Predictions"])
 
 #tab4:,"🔮 Player Predictions"
 
@@ -491,5 +498,44 @@ with tab2:
 
     # Display
 #    st.dataframe(player_df[cols_to_show])
+
+with tab5:
+    st.subheader("Player Predictions")
+    # Columns that should always appear
+    base_cols = ["M", "Rd", "Team A", "Team B", "Winner"]
+
+    # Pin "Player Stats" at the top
+    #pinned = ["Player Stats"]
+
+    # Sort all player names except the pinned one
+    others = sorted([p for p in ko_player_columns])
+
+    # Build final dropdown list
+    player_options = ["All Players"] + others
+
+    # Multiselect dropdown
+    players = st.multiselect(
+        "Choose players",
+        player_options
+        )
+
+    # If "All Players" is selected, include everyone
+    if "All Players" in players:
+        players = ko_player_columns
+
+    # If "Player Stats" is selected, handle it separately if needed
+    # (Right now it will just be ignored unless you define what it means)
+    players = [p for p in players if p in ko_player_columns]
+
+    # Collect all selected player columns
+    selected_player_cols = []
+    for p in players:
+        selected_player_cols.extend(ko_player_columns[p])
+
+    # Final columns to show
+    cols_to_show = base_cols + selected_player_cols
+
+    # Display
+    st.dataframe(player_ko_df[cols_to_show])
 
 #st.dataframe(leader_sort,hide_index=True)
