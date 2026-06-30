@@ -499,6 +499,9 @@ with tab2:
     # Display
 #    st.dataframe(player_df[cols_to_show])
 
+def colour_winner(val):
+    return f"<div style='background-color:#d4edda; text-align:center;'>{val}</div>"
+
 with tab5:
     st.subheader("Player Predictions")
     # Columns that should always appear
@@ -552,8 +555,9 @@ with tab5:
         allowed_rounds = ["R32", "R16","QF","SF","3F","F"]
     
     final_df = player_ko_df[player_ko_df['Rd'].isin(allowed_rounds)]
+    final_df["Winner"] = final_df["Winner"].apply(colour_winner)
     
     # Display
-    st.dataframe(final_df[cols_to_show])
+    st.dataframe(final_df[cols_to_show].to_html(escape=False), unsafe_allow_html=True)
 
 #st.dataframe(leader_sort,hide_index=True)
