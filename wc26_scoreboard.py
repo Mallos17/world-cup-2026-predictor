@@ -559,6 +559,7 @@ with tab5:
     final_df["Winner"] = final_df["Winner"].apply(colour_winner)
     
     # Display
-    st.dataframe(final_df.to_html(escape=False), unsafe_allow_html=True)
+    #st.dataframe(final_df)
+    st.markdown(final_df.to_html(escape=False), unsafe_allow_html=True)
 
 #st.dataframe(leader_sort,hide_index=True)
