@@ -15,10 +15,22 @@ from datetime import date,datetime,timedelta
 #from google.oauth2.service_account import Credentials
 
 st.title("World Cup Prediction Scoreboard")
+st.markdown("""
+<style>
+ul {
+    margin-top: 0px;
+    margin-bottom: 0px;
+    padding-left: 20px;
+}
+li {
+    line-height: 1.1;   /* reduce vertical spacing */
+    margin-bottom: 2px; /* tighten gap between bullets */
+}
+</style>
+""", unsafe_allow_html=True)
 
 st.markdown("""
 ## 🏆 Points System Reminder
-
 - **3 points** for each correct Round of 32 winner
 - **6 points** for each correct Round of 16 winner
 - **8 points** for each Quarter Final winner
