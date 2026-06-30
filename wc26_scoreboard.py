@@ -508,7 +508,7 @@ with tab5:
     #pinned = ["Player Stats"]
 
     # Sort all player names except the pinned one
-    others = sorted([p for p in ko_player_columns])
+    others = sorted(ko_player_columns)
 
     # Build final dropdown list
     player_options = ["All Players"] + others
@@ -519,23 +519,41 @@ with tab5:
         player_options
         )
 
-    # If "All Players" is selected, include everyone
+    # If "All Players" is selected, include every KO column
     if "All Players" in players:
-        players = ko_player_columns
-
-    # If "Player Stats" is selected, handle it separately if needed
-    # (Right now it will just be ignored unless you define what it means)
-    players = [p for p in players if p in ko_player_columns]
-
-    # Collect all selected player columns
-    selected_player_cols = []
-    for p in players:
-        selected_player_cols.extend(ko_player_columns[p])
+        selected_player_cols = ko_player_columns
+    else:
+        # Otherwise use only the selected columns
+        selected_player_cols = [p for p in players if p in ko_player_columns]
 
     # Final columns to show
     cols_to_show = base_cols + selected_player_cols
+    
+    selected_date = date.today()
+    selected_date = pd.to_datetime(selected_date)
+    date_a = pd.to_datetime("2026-07-03")
+    date_b = pd.to_datetime("2026-07-07")
+    date_c = pd.to_datetime("2026-07-11")
+    date_d = pd.to_datetime("2026-07-15")
+    
+    if selected_date <= date_a:
+        allowed_rounds = ["R32"]
 
+    elif selected_date <= date_b:
+        allowed_rounds = ["R32", "R16"]
+
+    elif selected_date <= date_c:
+        allowed_rounds = ["R32", "R16","QF"]
+        
+    elif selected_date <= date_d:
+        allowed_rounds = ["R32", "R16","QF","SF"]
+    
+    else:
+        allowed_rounds = ["R32", "R16","QF","SF","3F","F"]
+    
+    final_df = player_ko_df[player_ko_df['Rd'].isin(allowed_rounds)]
+    
     # Display
-    st.dataframe(player_ko_df[cols_to_show])
+    st.dataframe(final_df[cols_to_show])
 
 #st.dataframe(leader_sort,hide_index=True)
