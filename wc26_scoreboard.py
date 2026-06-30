@@ -23,8 +23,8 @@ ul {
     padding-left: 20px;
 }
 li {
-    line-height: 1.1;   /* reduce vertical spacing */
-    margin-bottom: 2px; /* tighten gap between bullets */
+    line-height: 1.0;   /* reduce vertical spacing */
+    margin-bottom: 0px; /* tighten gap between bullets */
 }
 </style>
 """, unsafe_allow_html=True)
