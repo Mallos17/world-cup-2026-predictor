@@ -556,10 +556,10 @@ with tab5:
     
     t2_df = player_ko_df[player_ko_df['Rd'].isin(allowed_rounds)]
     final_df = t2_df[cols_to_show]
-    final_df["Winner"] = final_df["Winner"].apply(colour_winner)
+    #final_df["Winner"] = final_df["Winner"].apply(colour_winner)
     
     # Display
-    #st.dataframe(final_df)
-    st.markdown(final_df.to_html(escape=False), unsafe_allow_html=True)
+    st.dataframe(final_df)
+    #st.markdown(final_df.to_html(escape=False), unsafe_allow_html=True)
 
 #st.dataframe(leader_sort,hide_index=True)
